@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future State Journey: Delivery Driver</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --ink: #1c2330;
+    --muted: #5d6778;
+    --line: #d9dee6;
+    --today: #b4412f;
+    --today-bg: #fbeeeb;
+    --accent: #1f6feb;
+    --accent-bg: #e9f1fe;
+    --good: #1a7f4b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+  }
+  .page { max-width: 1180px; margin: 0 auto; padding: 28px 24px 36px; }
+  header h1 { margin: 0 0 4px; font-size: 26px; }
+  header p { margin: 0; color: var(--muted); font-size: 14px; }
+  .persona {
+    margin-top: 14px; padding: 12px 16px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 10px; font-size: 13.5px;
+  }
+  .persona b { color: var(--ink); }
+
+  .today {
+    margin-top: 16px; padding: 10px 16px; border-radius: 10px;
+    background: var(--today-bg); border: 1px solid #f0c9c2; color: var(--today);
+    font-size: 13.5px; font-weight: 600;
+    display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center;
+  }
+  .today span.label { text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
+  .today .arrow { opacity: .6; }
+
+  /* Timeline */
+  .timeline { position: relative; margin-top: 26px; }
+  .rail {
+    position: absolute; left: 12.5%; right: 12.5%; top: 17px; height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--good)); border-radius: 2px;
+  }
+  .stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; position: relative; }
+  .stage { display: flex; flex-direction: column; align-items: stretch; }
+  .node {
+    align-self: center; width: 38px; height: 38px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    border: 4px solid var(--bg); z-index: 1;
+  }
+  .stage:nth-child(4) .node { background: var(--good); }
+  .card {
+    margin-top: 12px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 14px 12px; flex: 1;
+  }
+  .card h2 { margin: 0 0 10px; font-size: 16px; text-align: center; }
+  .field { margin-top: 10px; }
+  .field .k {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--muted); font-weight: 700; margin-bottom: 2px;
+  }
+  .field .v { font-size: 13px; }
+  .field.pain .v { color: var(--today); }
+  .field.pain .src { color: var(--muted); font-size: 11.5px; display: block; margin-top: 2px; }
+
+  /* Advantages */
+  .adv { margin-top: 24px; }
+  .adv h3 { margin: 0 0 10px; font-size: 16px; }
+  .adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .adv-item {
+    background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--good);
+    border-radius: 10px; padding: 12px 14px; font-size: 13px;
+  }
+  .adv-item b { display: block; margin-bottom: 3px; font-size: 14px; }
+
+  .notes { margin-top: 18px; font-size: 11.5px; color: var(--muted); }
+  .notes b { color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .rail { display: none; }
+    .stages { grid-template-columns: 1fr; }
+    .adv-grid { grid-template-columns: 1fr; }
+    .node { align-self: flex-start; }
+    .card h2 { text-align: left; }
+  }
+
+  @media print {
+    @page { size: landscape; margin: 10mm; }
+    body { background: #fff; }
+    .page { padding: 0; max-width: none; }
+    .card, .adv-item, .persona { break-inside: avoid; }
+    header h1 { font-size: 22px; }
+    .field .v { font-size: 11.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Future State Journey: Delivery Driver</h1>
+    <p>Strategy: reclaim operational simplicity by stripping legacy noise and making the tool the fastest for everyday work.</p>
+  </header>
+
+  <div class="persona">
+    <b>Persona:</b> Delivery driver (the disengaging frontline user) &nbsp;|&nbsp;
+    <b>Goal:</b> Mark each stop delivered quickly and move on without fighting the app.
+  </div>
+
+  <div class="today">
+    <span class="label">Today</span>
+    <span>Tap</span><span class="arrow">&rarr;</span><span>Tap</span><span class="arrow">&rarr;</span><span>Tap</span>
+    <span class="arrow">&rarr;</span><span>gives up</span><span class="arrow">&rarr;</span>
+    <span>texts dispatcher</span><span class="arrow">&rarr;</span><span>board goes stale</span>
+  </div>
+
+  <div class="timeline">
+    <div class="rail"></div>
+    <div class="stages">
+
+      <div class="stage">
+        <div class="node">1</div>
+        <div class="card">
+          <h2>Start the Route</h2>
+          <div class="field"><div class="k">User Action</div>
+            <div class="v">Taps Start Route on a clean home screen &rarr; shift begins in one tap.</div></div>
+          <div class="field"><div class="k">Internal State</div>
+            <div class="v">Confident the app is ready &rarr; no hunting through menus.</div></div>
+          <div class="field pain"><div class="k">Pain Point Addressed</div>
+            <div class="v">Core actions buried 2-3 levels deep &rarr; surfaced as the primary action.
+              <span class="src">BUG-2079, UXR-11</span></div></div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="node">2</div>
+        <div class="card">
+          <h2>Arrive and Deliver</h2>
+          <div class="field"><div class="k">User Action</div>
+            <div class="v">Views a single-stop screen on arrival &rarr; attention stays on the delivery.</div></div>
+          <div class="field"><div class="k">Internal State</div>
+            <div class="v">Focused and unhurried &rarr; the app stays out of the way.</div></div>
+          <div class="field pain"><div class="k">Pain Point Addressed</div>
+            <div class="v">Feature clutter and nested menus &rarr; only essential stop tasks remain.
+              <span class="src">UXR-04, UXR-08</span></div></div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="node">3</div>
+        <div class="card">
+          <h2>One-Tap Complete</h2>
+          <div class="field"><div class="k">User Action</div>
+            <div class="v">Taps one large Mark Delivered button &rarr; done at the doorstep, one-handed.</div></div>
+          <div class="field"><div class="k">Internal State</div>
+            <div class="v">Relieved and in control &rarr; no reason to reach for a text message.</div></div>
+          <div class="field pain"><div class="k">Pain Point Addressed</div>
+            <div class="v">Three taps across three screens &rarr; single-tap completion.
+              <span class="src">BUG-2055, UXR-01</span></div></div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="node">4</div>
+        <div class="card">
+          <h2>Sync and Surface</h2>
+          <div class="field"><div class="k">User Action</div>
+            <div class="v">Walks to the next stop &rarr; photo and status sync in the background.</div></div>
+          <div class="field"><div class="k">Internal State</div>
+            <div class="v">Trusts the delivery is recorded &rarr; stops double-reporting to dispatch.</div></div>
+          <div class="field pain"><div class="k">Pain Point Addressed</div>
+            <div class="v">Off-platform texting and stale dashboards &rarr; admins see accurate status.
+              <span class="src">UXR-09, BUG-2072, BUG-2061</span></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="adv">
+    <h3>3 Competitive Advantages Over the Manual Workaround</h3>
+    <div class="adv-grid">
+      <div class="adv-item"><b>1. Faster at the doorstep</b>One tap in the app beats opening a second app and typing one-handed.</div>
+      <div class="adv-item"><b>2. Self-updating records</b>Each completion is timestamped and written to the dispatcher board, so no one reconciles texts by hand.</div>
+      <div class="adv-item"><b>3. Built-in proof of delivery</b>Photos attach to the stop and retry on weak signal, which a text cannot do.</div>
+    </div>
+  </section>
+
+  <p class="notes">
+    <b>Notes:</b> Internal State reflects the driver's mindset at each stage, not system behavior.
+    Cached stop lists, photo auto-retry, and background sync are proposed solutions; the research documents only the problems, so validate with engineering.
+    The single-stop view in Stage 2 is inferred from the "legacy noise" strategy, not requested directly by drivers.
+  </p>
+
+</div>
+</body>
+</html>
