@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RouteLogic Velocity Roadmap</title>
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #1b2330;
+    --muted: #5f6b7c;
+    --line: #dce1e8;
+    --brand: #1f4fd8;
+    --qw: #16794a;   --qw-bg: #e3f4ea;
+    --mp: #1f4fd8;   --mp-bg: #e6edfd;
+    --fi: #8a5a00;   --fi-bg: #fdf1d6;
+    --ts: #b3311f;   --ts-bg: #fbe7e3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 28px 24px 48px; }
+
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo {
+    width: 40px; height: 40px; border-radius: 10px; background: var(--brand);
+    color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px;
+  }
+  h1 { margin: 0; font-size: 24px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+  .team {
+    font-size: 12.5px; color: var(--muted); background: var(--card);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+  }
+  .team b { color: var(--ink); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 22px 0 6px; }
+  .controls .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-right: 4px; }
+  .chip {
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    border-radius: 999px; padding: 6px 13px; font-size: 13px; cursor: pointer; font-family: inherit;
+  }
+  .chip:hover { border-color: #aab3c0; }
+  .chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .chip .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .spacer { flex: 1; }
+  .link {
+    background: none; border: none; color: var(--brand); font-size: 13px; cursor: pointer; font-family: inherit; padding: 6px 4px;
+  }
+
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 14px; align-items: start; }
+  .lane { background: #eaeef3; border-radius: 14px; padding: 14px; min-height: 140px; }
+  .lane-head { margin: 2px 4px 12px; }
+  .lane-title { display: flex; align-items: center; gap: 8px; font-weight: 800; letter-spacing: .06em; font-size: 14px; }
+  .lane-count {
+    font-size: 11.5px; font-weight: 700; background: #fff; color: var(--muted);
+    border-radius: 999px; padding: 1px 8px; border: 1px solid var(--line);
+  }
+  .lane-sub { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+  .lane.now  { border-top: 4px solid var(--brand); }
+  .lane.next { border-top: 4px solid #6d8be8; }
+  .lane.later{ border-top: 4px solid #aab3c0; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 13px 14px; margin-bottom: 10px; cursor: pointer;
+    transition: box-shadow .15s, transform .15s, opacity .2s;
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(20,30,50,.08); transform: translateY(-1px); }
+  .card.dim { opacity: .25; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .id { font-size: 11.5px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+  .name { font-weight: 700; font-size: 14.5px; margin-top: 1px; }
+  .badge {
+    flex-shrink: 0; font-size: 11px; font-weight: 700; border-radius: 999px;
+    padding: 3px 9px; white-space: nowrap;
+  }
+  .q-qw { color: var(--qw); background: var(--qw-bg); }
+  .q-mp { color: var(--mp); background: var(--mp-bg); }
+  .q-fi { color: var(--fi); background: var(--fi-bg); }
+  .q-ts { color: var(--ts); background: var(--ts-bg); }
+  .rationale { margin: 9px 0 0; font-size: 13px; color: #36415a; }
+  .meta { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 12.5px; color: var(--muted); }
+  .meta span { display: inline-block; margin-right: 14px; }
+  .meta b { color: var(--ink); }
+  .card.open .meta { display: block; }
+
+  .cut { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .cut h2 { margin: 0; font-size: 15px; letter-spacing: .06em; }
+  .cut .sub { margin-bottom: 12px; }
+  .cut-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cut .card { background: #fafbfc; cursor: default; margin: 0; }
+  .cut .card:hover { box-shadow: none; transform: none; }
+  .cut .name { text-decoration: line-through; text-decoration-color: #b3311f88; color: var(--muted); }
+
+  .legend { margin-top: 22px; font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px; }
+
+  @media (max-width: 900px) {
+    .lanes, .cut-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: #fff; }
+    .controls, .legend { display: none; }
+    .card { break-inside: avoid; }
+    .card.dim { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <div class="logo">RL</div>
+      <div>
+        <h1>RouteLogic Velocity Roadmap</h1>
+        <div class="sub">Reclaim operational simplicity: the fastest tool for everyday driver work.</div>
+      </div>
+    </div>
+    <div class="team"><b>Team:</b> 2 engineers + 1 designer + 1 CS lead</div>
+  </header>
+
+  <div class="controls" id="controls">
+    <span class="lbl">Filter</span>
+    <button class="chip active" data-q="all">All</button>
+    <button class="chip" data-q="Quick Win"><span class="dot" style="background:var(--qw)"></span>Quick Win</button>
+    <button class="chip" data-q="Major Project"><span class="dot" style="background:var(--mp)"></span>Major Project</button>
+    <button class="chip" data-q="Fill-In"><span class="dot" style="background:#d9a21b"></span>Fill-In</button>
+    <button class="chip" data-q="Time Sinker"><span class="dot" style="background:var(--ts)"></span>Time Sinker</button>
+    <span class="spacer"></span>
+    <button class="link" id="toggleAll">Expand all</button>
+  </div>
+
+  <main class="lanes" id="lanes"></main>
+
+  <section class="cut">
+    <h2>CUT LIST</h2>
+    <div class="sub">Removed from scope. Not scheduled in any lane.</div>
+    <div class="cut-grid" id="cutGrid"></div>
+  </section>
+
+  <div class="legend">
+    <span><b>Value</b> 1-5: 5 directly moves Compliance Check utilization and NPS.</span>
+    <span><b>Effort</b> 1-5: 1 is days, 5 is months.</span>
+    <span>Click a card to see scores.</span>
+  </div>
+</div>
+
+<script>
+  const QUAD_CLASS = { "Quick Win": "q-qw", "Major Project": "q-mp", "Fill-In": "q-fi", "Time Sinker": "q-ts" };
+
+  const lanes = [
+    { key: "now", title: "NOW", sub: "Pilot (4 weeks, 3 accounts)" },
+    { key: "next", title: "NEXT", sub: "GA Release (weeks 5-8)" },
+    { key: "later", title: "LATER", sub: "Backlog" }
+  ];
+
+  const features = [
+    { id: "B1", name: "One-Click Compliance Checklist", lane: "now", quadrant: "Major Project", value: 5, effort: 3,
+      rationale: "Collapses the 14.6-minute compliance step, the biggest direct lever on Compliance Check utilization and driver NPS." },
+    { id: "B5", name: "Step Progress Indicator", lane: "now", quadrant: "Fill-In", value: 2, effort: 1,
+      rationale: "Near-free signposting for the pilot, but it describes the layered flow rather than removing it, so it must ship alongside B1." },
+    { id: "B9", name: "Compliance Audit Trail Export", lane: "now", quadrant: "Fill-In", value: 2, effort: 2,
+      rationale: "Legal/CS-originated and low effort, so it clears early; it serves auditors, not drivers, so keep scope to a single PDF." },
+
+    { id: "B2", name: "Smart Daily Report Auto-Fill", lane: "next", quadrant: "Time Sinker", value: 2, effort: 4,
+      rationale: "Saves report time but does not touch the core friction, so GA scope should be gated on pilot results." },
+    { id: "B3", name: "Shift Handoff Wizard", lane: "next", quadrant: "Fill-In", value: 3, effort: 2,
+      rationale: "Saves about 6.8 min/day at modest effort, though handoff is not the compliance or mark-complete friction." },
+    { id: "B4", name: "Mobile-First Coordinator Dashboard", lane: "next", quadrant: "Time Sinker", value: 3, effort: 5,
+      rationale: "Reworks three coordinator workflows to 2 taps and serves half of the NPS metric, but the driver gains nothing and effort is high." },
+    { id: "B6", name: "Driver Alert Notifications", lane: "next", quadrant: "Major Project", value: 4, effort: 3,
+      rationale: "Push alerts attack the laggy-app misery and stale-route problem, and compliance flags can lift utilization for driver and coordinator." },
+
+    { id: "B8", name: "Fleet Analytics Manager View", lane: "later", quadrant: "Time Sinker", value: 1, effort: 4,
+      rationale: "Sales-originated executive view with no driver impact and high effort, so it waits in the backlog." }
+  ];
+
+  const cuts = [
+    { id: "B7", name: "Contextual AI ETA Display", quadrant: "Fill-In", value: 2, effort: 2,
+      rationale: "ETA is not the Moment of Misery, adoption sits at 11%, and inline ETA adds clutter to a product we are decluttering." },
+    { id: "B10", name: "In-App Coordinator Training", quadrant: "Time Sinker", value: 2, effort: 3,
+      rationale: "Training patches complexity we are removing and does nothing for the driver." }
+  ];
+
+  function cardHTML(f, withMeta) {
+    return `
+      <article class="card" data-quadrant="${f.quadrant}">
+        <div class="card-top">
+          <div>
+            <div class="id">${f.id}</div>
+            <div class="name">${f.name}</div>
+          </div>
+          <span class="badge ${QUAD_CLASS[f.quadrant]}">${f.quadrant}</span>
+        </div>
+        <p class="rationale">${f.rationale}</p>
+        ${withMeta ? `<div class="meta"><span><b>Value</b> ${f.value}/5</span><span><b>Effort</b> ${f.effort}/5</span></div>` : ""}
+      </article>`;
+  }
+
+  const lanesEl = document.getElementById("lanes");
+  lanesEl.innerHTML = lanes.map(l => {
+    const items = features.filter(f => f.lane === l.key);
+    return `
+      <section class="lane ${l.key}">
+        <div class="lane-head">
+          <div class="lane-title">${l.title} <span class="lane-count">${items.length}</span></div>
+          <div class="lane-sub">${l.sub}</div>
+        </div>
+        ${items.map(f => cardHTML(f, true)).join("")}
+      </section>`;
+  }).join("");
+
+  document.getElementById("cutGrid").innerHTML = cuts.map(f => cardHTML(f, false)).join("");
+
+  // Expand / collapse
+  lanesEl.addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    if (card) card.classList.toggle("open");
+  });
+
+  let allOpen = false;
+  const toggleBtn = document.getElementById("toggleAll");
+  toggleBtn.addEventListener("click", () => {
+    allOpen = !allOpen;
+    lanesEl.querySelectorAll(".card").forEach(c => c.classList.toggle("open", allOpen));
+    toggleBtn.textContent = allOpen ? "Collapse all" : "Expand all";
+  });
+
+  // Quadrant filter
+  document.getElementById("controls").addEventListener("click", e => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+    const q = chip.dataset.q;
+    document.querySelectorAll("#lanes .card").forEach(c => {
+      c.classList.toggle("dim", q !== "all" && c.dataset.quadrant !== q);
+    });
+  });
+</script>
+</body>
+</html>
