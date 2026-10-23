@@ -1,38 +1,42 @@
-# Roadmap, PRD & Prototype (Module 4)
+# Feature Roadmap, Module 4 · RouteLogic Velocity
 
-## Your strategic anchors
-- **Persona (M2), who are you solving for?:** Delivery driver
-- **Primary success metric (M3), your leading indicator:** Compliance Check utilization and NPS scores improve for both the driver and coordinator.
-- **Moment of misery (M2), the specific friction blocking the goal:** Multiple layers to mark a delivery complete and a laggy app experience.
-- **Guardrail metric (M3), what must not drop or break:** The driver utilization of the compliance checks.
+**Team:** 2 engineers + 1 designer + 1 CS lead
 
-## Scan the backlog & set a human baseline
-- **My instinctive “quick wins” before touching the AI (2 to 3 feature IDs + why):** B1 , B6
+## Strategic anchors
+- **Persona:** Delivery Driver
+- **Primary metric:** Compliance Check utilization and NPS scores improve for both the driver and coordinator.
+- **Moment of misery:** Multiple layers to mark a delivery complete and a laggy app experience.
+- **Guardrail:** The driver utilization of the compliance checks.
 
-## Audit, override & decide
-- **Where did you override the AI? (feature + old vs. new score + why):** Pretty in sync with the priorities I scored
-- **Did the AI over-value a Sales/Eng request your M2 interviews don’t support?:** no
-- **Did it underweight something your M3 cohort/funnel data strongly supports?:** It underweighted some critical features based on the user being the delivery driver. Coordinator and leadership features are important as well but not as a first step.
+## Scoring
+| Feature | Value | Effort | Quadrant | Decision | Rationale |
+|---|---|---|---|---|---|
+| B1 One-Click Compliance Checklist | 5 | 3 | Major Project | Now |  |
+| B2 Smart Daily Report Auto-Fill | 3 | 2 | Fill-In | Next |  |
+| B3 Shift Handoff Wizard | 2 | 4 | Time Sinker | Next |  |
+| B4 Mobile-First Coordinator Dashboard | 4 | 4 | Major Project | Next |  |
+| B5 Step Progress Indicator | 4 | 2 | Quick Win | Now |  |
+| B6 Driver Alert Notifications | 5 | 3 | Major Project | Next |  |
+| B7 Contextual AI ETA Display | 1 | 4 | Time Sinker | Cut |  |
+| B8 Fleet Analytics Manager View | 3 | 2 | Fill-In | Later |  |
+| B9 Compliance Audit Trail Export | 4 | 2 | Quick Win | Now |  |
+| B10 In-App Coordinator Training | 2 | 3 | Time Sinker | Cut |  |
 
-## Generate your interactive roadmap
-- **My “Now” lane (this sprint), the 2 to 3 quick wins I’ll build first:** B1
-One-Click Compliance Checklist
-Major Project
-Collapses the 14.6-minute compliance step, the biggest direct lever on Compliance Check utilization and driver NPS.
-B5
-Step Progress Indicator
-Fill-In
-Near-free signposting for the pilot, but it describes the layered flow rather than removing it, so it must ship alongside B1.
-B9
-Compliance Audit Trail Export
-Fill-In
-Legal/CS-originated and low effort, so it clears early; it serves auditors, not drivers, so keep scope to a single PDF.
-- **What I cut, and the “no” I’m protecting the scope from:** B7
-Contextual AI ETA Display
-Fill-In
-ETA is not the Moment of Misery, adoption sits at 11%, and inline ETA adds clutter to a product we are decluttering.
-B10
-In-App Coordinator Training
-Time Sinker
-Training patches complexity we are removing and does nothing for the driver.
-- **Prototype/roadmap screenshot link (paste into your deliverables):** https://github.com/rlschm04/pm-final-project/blob/main/04-roadmap/routelogic-velocity-roadmap.html
+## Roadmap
+### NOW, Pilot (4 weeks, 3 accounts)
+- **B1 One-Click Compliance Checklist**, _rationale_
+- **B5 Step Progress Indicator**, _rationale_
+- **B9 Compliance Audit Trail Export**, _rationale_
+
+### NEXT, GA Release (weeks 5-8)
+- **B2 Smart Daily Report Auto-Fill**, _rationale_
+- **B3 Shift Handoff Wizard**, _rationale_
+- **B4 Mobile-First Coordinator Dashboard**, _rationale_
+- **B6 Driver Alert Notifications**, _rationale_
+
+### LATER, backlog
+- **B8 Fleet Analytics Manager View**, _rationale_
+
+### ✂ Cut List
+- **B7 Contextual AI ETA Display**, _rationale_
+- **B10 In-App Coordinator Training**, _rationale_
