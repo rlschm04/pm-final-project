@@ -1,25 +1,32 @@
-# Experimentation Plan
+# A/B Experiment Brief, RouteLogic (B2B)
 
-> **Module 5 · ★ Deliverable 5.** Repo file `05-experimentation/experimentation-plan.md` — part of your submission.
-> Do the lab in the **Module 5 · Exercise Guide** (linked from the Module 5 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **Experimentation Plan** slide of your Module 6 final deck.
-
-## Overview
-
-_A high-level validation strategy to test your hypothesis before full-scale development._
-
-_____
-
-## What you're testing
-
-| Element | Detail |
+## Parameters
+| Parameter | Decision |
 |---|---|
-| Hypothesis under test | _____ |
-| Experiment design (A/B, etc.) | _____ |
-| Primary metric | _____ |
-| Guardrail metric | _____ |
-| Decision rule (ship / kill / pivot) | _____ |
+| Feature under test | Scaled down app for compliance checks to mark a delivery complete. |
+| Persona | Delivery driver |
+| Expected outcome | Increase in completed compliance checks. |
+| Primary success metric | Compliance checks completed |
+| Baseline rate | 64% |
+| Guardrail metric | Compliance check utilization |
+| Guardrail boundary | utilization must not drop below 50% |
+| Second guardrail | · |
+| Minimum Detectable Effect | +5% |
+| Sample size per arm | 1,398 |
+| Traffic split | · |
+| Test duration | 14 days |
+| Significance threshold | p < 0.05 |
 
-## Findings & decision _(after running it)_
+## Control vs. Variant
+- **Control (A):** The experience is having to check compliances through three different screens with a laggy experience.
+- **Variant (B):** Cut down the compliance checks to one screen.
+- **Held constant (isolation check):** The app has a home page that list the deliveries in order of completion.
 
-_____
+## Hypothesis
+> I believe that Scaled down app for compliance checks to mark a delivery complete. for Delivery driver will result in Increase in completed compliance checks., as measured by a +5% change in Compliance checks completed within 14 days. We will protect Compliance check utilization throughout the test.
+
+## Shipping criteria
+> We will **ship** if Compliance checks completed improves by ≥ +5% at p < 0.05 and Compliance check utilization does not reach utilization must not drop below 50% after 14 days.
+> We will **iterate** if direction is positive but lift is below the MDE.
+> We will **kill** if the primary metric shows no improvement or moves negatively.
+> The read date is fixed at the end of 14 days, no results reviewed before this date.
